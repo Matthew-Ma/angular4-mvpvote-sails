@@ -1,0 +1,7 @@
+<div class="example-container">
+  <div class="example-button-row">
+
+    <a *ngFor="let team of teams" md-raised-button routerLink="./players/{{team.id}}">{{team.name}}</a>
+
+  </div>
+</div>
