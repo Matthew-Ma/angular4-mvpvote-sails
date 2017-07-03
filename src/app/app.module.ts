@@ -51,7 +51,7 @@ import { HighlightDirective } from './ranking-list/highlight.directive'
     BrowserAnimationsModule,
   ],
   providers: [
-    //TeamsService, AuthGuard, ...AUTH_PROVIDERS
+    // TeamsService, AuthGuard, ...AUTH_PROVIDERS
     TeamsService
   ],
   bootstrap: [AppComponent]
