@@ -9,7 +9,7 @@ import { AuthGuard } from './common/auth.guard';
 
 import { AppComponent } from './app.component';
 
-import { MdMenuModule, MdTabsModule } from '@angular/material';
+import { MdMenuModule, MdTabsModule, MdInputModule } from '@angular/material';
 import 'hammerjs';
 
 import { SearchPipe } from './ranking-list/search.pipe';
@@ -42,6 +42,7 @@ import { RankingListComponent } from './ranking-list/ranking-list.component';
     BrowserModule,
     MdMenuModule,
     MdTabsModule,
+    MdInputModule,
     AppRoutingModule,
     HttpModule,
     FormsModule,
