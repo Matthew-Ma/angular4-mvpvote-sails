@@ -23,7 +23,19 @@ export class RankingListComponent implements OnInit {
   imageWidth = 50;
   imageMargin = 0;
 
+  isDesc = false;
+  column: string;
+  direction = 1;
+
+
   constructor(private _teamService: TeamsService) { }
+
+  sort(property): void {
+    this.isDesc = !this.isDesc;
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
+  }
+
 
   toggleImage(): void {
     this.showImage = !this.showImage;

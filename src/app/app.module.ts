@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { MdMenuModule, MdTabsModule } from '@angular/material';
 import 'hammerjs';
 
+import { SearchPipe } from './ranking-list/search.pipe';
+import { SortPipe } from './ranking-list/sort.pipe';
 
 import { AppRoutingModule, routingComponents } from './app.routing';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
@@ -32,8 +34,10 @@ import { RankingListComponent } from './ranking-list/ranking-list.component';
     PlayersComponent,
     TeamsComponent,
     SignupComponent,
+    SearchPipe,
+    SortPipe,
     RankingListComponent
-],
+  ],
   imports: [
     BrowserModule,
     MdMenuModule,
