@@ -10,7 +10,7 @@ export class SearchPipe implements PipeTransform {
       return value;
     }
 
-    return value.filter(function (player) {
+    return value.filter(function (players) {
       return player.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
     })
   }
