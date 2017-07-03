@@ -8,16 +8,18 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { ITeam } from './teams';
+import { IPlayer } from './players';
 
 @Injectable()
 export class TeamsService {
 
-  private _productUrl = 'http://localhost:1337/teams';
+  private _teamsUrl = 'http://localhost:1337/teams';
+  private _playersUrl = 'http://localhost:1337/players';
 
   constructor(private _http: Http) { }
 
   getTeams(): Observable<ITeam[]> {
-    return this._http.get(this._productUrl)
+    return this._http.get(this._teamsUrl)
       .map((response: Response) => <ITeam[]>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
@@ -25,9 +27,15 @@ export class TeamsService {
 
   getTeam(id: number): Observable<ITeam> {
     return this.getTeams()
-      //.map((teams: ITeam[]) => teams.map(p => console.log(JSON.stringify(p.id))))
       .map((teams: ITeam[]) => teams.find(p => p.id === id))
       .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  getPlayers(): Observable<IPlayer[]> {
+    return this._http.get(this._playersUrl)
+      .map((response: Response) => <IPlayer[]>response.json())
+      .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
   }
 

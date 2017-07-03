@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from './common/auth.guard';
@@ -21,6 +22,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { TeamsService } from './teams/teams.service';
 import { SignupComponent } from './signup/signup.component';
+import { RankingListComponent } from './ranking-list/ranking-list.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { SignupComponent } from './signup/signup.component';
     routingComponents,
     PlayersComponent,
     TeamsComponent,
-    SignupComponent
-  ],
+    SignupComponent,
+    RankingListComponent
+],
   imports: [
     BrowserModule,
     MdMenuModule,
     MdTabsModule,
     AppRoutingModule,
     HttpModule,
+    FormsModule,
     BrowserAnimationsModule,
   ],
   providers: [

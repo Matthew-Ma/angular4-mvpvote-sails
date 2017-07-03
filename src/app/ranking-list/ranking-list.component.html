@@ -1,0 +1,55 @@
+<div class='panel panel-primary'>
+  <!-- Filter the Products   -->
+  <div class='panel-body'>
+    <div class='row'>
+      <div class='col-md-1'>Filter by:</div>
+      <div class='col-md-2'>
+        <input type='text' [(ngModel)]='listFilter' />
+      </div>
+      <div class='col-md-2'>
+        <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+      </div>
+
+    </div>
+    <div class='row' *ngIf='listFilter'>
+      <div class='col-md-6'>
+        <h3>Filtered by: {{listFilter}} </h3>
+      </div>
+    </div>
+
+    <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+    <div class='table-responsive'>
+      <table class='table' *ngIf='players && players.length'>
+        <thead>
+          <tr>
+            <th>Ranking</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let player of players; let idx = index'>
+            <td>
+              {{ idx+1 }}
+            </td>
+            <td>
+              <ng-container *ngIf='!showImage'>{{ player.name }}</ng-container>
+              <img *ngIf='showImage' [src]="'./assets/img/' + player.image" [title]='player.name | uppercase' [style.width.px]='imageWidth'
+                [style.margin.px]='imageMargin'>
+            </td>
+            <td>
+              <ng-container *ngIf='!showImage'>{{ player.byTeams.name }}</ng-container>
+              <img *ngIf='showImage' [src]="'./assets/img/' + player.byTeams.image" [title]='player.byTeams.name | uppercase' [style.width.px]='imageWidth'
+                [style.margin.px]='imageMargin'>
+            </td>
+            <td>{{ player.votes }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
