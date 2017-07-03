@@ -2,9 +2,9 @@
   <!-- Filter the Products   -->
   <div class='panel-body'>
     <div class='row'>
-      <div class='col-md-1'>Filter by:</div>
+      <div class='col-md-1'>Search by :</div>
       <div class='col-md-2'>
-        <input type='text' [(ngModel)]='listFilter' />
+        <input type='text' [(ngModel)]='searchText' />
       </div>
       <div class='col-md-2'>
         <button class='btn btn-primary' (click)='toggleImage()'>
@@ -15,7 +15,7 @@
     </div>
     <div class='row' *ngIf='listFilter'>
       <div class='col-md-6'>
-        <h3>Filtered by: {{listFilter}} </h3>
+        <h3>Filtered by: {{searchText}} </h3>
       </div>
     </div>
 
@@ -32,17 +32,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let player of players; let idx = index'>
+          <tr *ngFor='let player of players | search: searchText; let idx = index'>
             <td>
               {{ idx+1 }}
             </td>
             <td>
-              <ng-container *ngIf='!showImage'>{{ player.name }}</ng-container>
+              <ng-container>{{ player.name }}</ng-container>
               <img *ngIf='showImage' [src]="'./assets/img/' + player.image" [title]='player.name | uppercase' [style.width.px]='imageWidth'
                 [style.margin.px]='imageMargin'>
             </td>
             <td>
-              <ng-container *ngIf='!showImage'>{{ player.byTeams.name }}</ng-container>
+              <ng-container>{{ player.byTeams.name }}</ng-container>
               <img *ngIf='showImage' [src]="'./assets/img/' + player.byTeams.image" [title]='player.byTeams.name | uppercase' [style.width.px]='imageWidth'
                 [style.margin.px]='imageMargin'>
             </td>

@@ -18,7 +18,7 @@ export class RankingListComponent implements OnInit {
 
   players: IPlayer[];
   errorMessage: string;
-  listFilter: string;
+  searchText: string;
   showImage = false;
   imageWidth = 50;
   imageMargin = 0;
