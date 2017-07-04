@@ -45,5 +45,6 @@ module.exports.routes = {
    * for configuration options and examples.                                  *
    *                                                                          *
    ***************************************************************************/
-  'get /teams/players': 'TeamsController.allPlayers'
+
+  'POST /users/comein': 'UsersController.comein'
 };
