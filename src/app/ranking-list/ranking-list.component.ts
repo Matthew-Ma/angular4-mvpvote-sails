@@ -12,7 +12,7 @@ import { TeamsService } from '../teams/teams.service';
 @Component({
   selector: 'app-ranking-list',
   templateUrl: './ranking-list.component.html',
-  styleUrls: ['./ranking-list.component.css']
+  styleUrls: ['./ranking-list.component.css'],
 })
 export class RankingListComponent implements OnInit {
 
@@ -27,6 +27,7 @@ export class RankingListComponent implements OnInit {
   column: string;
   direction = 1;
 
+  playerID: number;
 
   constructor(private _teamService: TeamsService) { }
 
@@ -39,6 +40,12 @@ export class RankingListComponent implements OnInit {
 
   toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+
+  vote(playerID): void {
+    this.playerID = playerID;
+    console.log(playerID);
+
   }
 
   ngOnInit() {

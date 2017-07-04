@@ -20,11 +20,12 @@ import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { PlayersComponent } from './players/players.component';
 import { BarChartComponent } from './chart/chart.component';
 import { TeamsComponent } from './teams/teams.component';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { TeamsService } from './teams/teams.service';
 import { SignupComponent } from './signup/signup.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
+
+import { HighlightDirective } from './ranking-list/highlight.directive'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RankingListComponent } from './ranking-list/ranking-list.component';
     SignupComponent,
     SearchPipe,
     SortPipe,
-    RankingListComponent
+    RankingListComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   signup(event, userEmail) {
     event.preventDefault();
     const body = JSON.stringify({ userEmail });
-    this.http.post('http://localhost:3001/users', body, { headers: contentHeaders })
+    this.http.post('http://localhost:1337/users', body, { headers: contentHeaders })
       .subscribe(
       response => {
         localStorage.setItem('id_token', response.json().id_token);

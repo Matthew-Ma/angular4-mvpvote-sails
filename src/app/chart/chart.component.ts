@@ -1,50 +1,46 @@
-import { Component } from '@angular/core';
-
+import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild, OnInit } from '@angular/core';
+import { Chart } from 'chart.js';
+declare let Chart: any;
 @Component({
   selector: 'app-bar-chart',
-  templateUrl: './bar-chart-demo.html'
+  templateUrl: './chart.component.html'
 })
-export class BarChartComponent {
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType = 'bar';
-  public barChartLegend = true;
+export class BarChartComponent implements OnInit {
+  @ViewChild('donut') donut: ElementRef;
+  constructor() { }
 
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  ngOnInit() {
+    const donutCtx = this.donut.nativeElement.getContext('2d');
 
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+    const data = {
+      labels: [
+        'Value A',
+        'Value B'
+      ],
+      datasets: [
+        {
+          'data': [101342, 55342],   // Example data
+          'backgroundColor': [
+            '#1fc8f8',
+            '#76a346'
+          ]
+        }]
+    };
+
+    const chart = new Chart(
+      donutCtx,
+      {
+        'type': 'doughnut',
+        'data': data,
+        'options': {
+          'cutoutPercentage': 50,
+          'animation': {
+            'animateScale': true,
+            'animateRotate': false
+          }
+        }
+      }
+    );
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    const clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
-  }
 }
