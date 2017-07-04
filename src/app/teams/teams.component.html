@@ -1,6 +1,5 @@
 <div class="example-container">
   <div class="example-button-row">
-   <!-- <a md-raised-button [router-link]="['./ranking/list']">Ranking List</a>-->
     <a md-raised-button routerLink="/ranking/list">Ranking List</a>
     <a *ngFor="let team of teams" md-raised-button routerLink="/players/list/{{team.id}}">{{team.name}}</a>
   </div>
