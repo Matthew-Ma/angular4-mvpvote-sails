@@ -159,7 +159,7 @@ module.exports.blueprints = {
 
   // defaultLimit: 30
 
-  rest: false,
+
   actions: false,
   shortcuts: false
 

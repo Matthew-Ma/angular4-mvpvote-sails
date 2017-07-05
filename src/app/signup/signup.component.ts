@@ -21,12 +21,14 @@ export class SignupComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.model.email)
       .subscribe(result => {
+        console.log(result);
+
         if (result === true) {
           // login successful
           this.router.navigate(['/']);
         } else {
           // login failed
-          this.error = 'Username or password is incorrect';
+          this.error = 'Email is incorrect';
           this.loading = false;
         }
       });

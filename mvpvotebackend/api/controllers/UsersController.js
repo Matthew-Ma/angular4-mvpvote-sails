@@ -28,17 +28,29 @@ module.exports = {
         //old user: fetch
         if (!finn) {
           Users.create({
-            email: 'Finn@gmail.com'
+            email: req.body.email
           }).exec(function (err, newUser) {
             if (err) {
               return res.serverError(err);
             }
+            var responseData = {
+              user: newUser,
+              token: JwtService.issue({
+                id: newUser.id
+              })
+            }
             sails.log('newUser is:', newUser);
-            return res.json(newUser);
+            return ResponseService.json(200, res, "User created", responseData);
           });
 
         } else {
-          return res.json(finn);
+          var responseData = {
+            user: finn,
+            token: JwtService.issue({
+              id: finn.id
+            })
+          }
+          return ResponseService.json(200, res, "User fetched", responseData);
         }
 
 

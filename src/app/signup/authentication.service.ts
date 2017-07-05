@@ -14,16 +14,18 @@ export class AuthenticationService {
   }
 
   login(email: string): Observable<boolean> {
-    return this.http.post('/api/signup', JSON.stringify({ email: email }))
+    return this.http.post('http://localhost:1337/api/signup', JSON.stringify({ email: email }))
       .map((response: Response) => {
+        console.log(response.json());
         // login successful if there's a jwt token in the response
-        const token = response.json() && response.json().token;
+        const token = response.json() && response.json().data.token;
         if (token) {
           // set token property
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
+          console.log(localStorage.getItem('currentUser'));
 
           // return true to indicate successful login
           return true;
