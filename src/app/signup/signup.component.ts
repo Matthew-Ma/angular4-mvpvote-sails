@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
-import { contentHeaders } from '../common/headers';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,26 +8,33 @@ import { contentHeaders } from '../common/headers';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  model: any = {};
+  loading = false;
+  error = '';
 
-  constructor(public router: Router, public http: Http) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
-  signup(event, userEmail) {
+  signup() {
     event.preventDefault();
-    const body = JSON.stringify({ userEmail });
-    this.http.post('http://localhost:1337/users', body, { headers: contentHeaders })
-      .subscribe(
-      response => {
-        localStorage.setItem('id_token', response.json().id_token);
-        this.router.navigate(['home']);
-      },
-      error => {
-        alert(error.text());
-        console.log(error.text());
-      }
-      );
+    this.loading = true;
+    this.authenticationService.login(this.model.email)
+      .subscribe(result => {
+        if (result === true) {
+          // login successful
+          this.router.navigate(['/']);
+        } else {
+          // login failed
+          this.error = 'Username or password is incorrect';
+          this.loading = false;
+        }
+      });
   }
 
   ngOnInit() {
+    // reset login status
+    this.authenticationService.logout();
   }
 
 }

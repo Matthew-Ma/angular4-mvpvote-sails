@@ -46,5 +46,5 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  'POST /users/comein': 'UsersController.comein'
+  'POST /api/signup': 'UsersController.signup'
 };

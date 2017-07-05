@@ -6,9 +6,10 @@ import { PlayersComponent } from './players/players.component';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
 import { SignupComponent } from './signup/signup.component';
-
+import { BarChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
+  { path: 'chart', component: BarChartComponent },
   { path: '', redirectTo: '/players', pathMatch: 'full' },
   {
     path: 'ranking', children: [

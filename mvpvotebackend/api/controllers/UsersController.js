@@ -4,32 +4,45 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
+var _ = require('lodash');
 module.exports = {
-  comein: function (req, res) {
-    return res.json(req);
-    /*    Users.findOne({
-            email: req.param('email'),
-          })
-          .exec(function (err, foundUser) {
-           if (err) return res.negotiate(err);
-                    //new user: add
-                    //old user: fetch
-                    if (!foundUser) {
+  signup: function (req, res) {
 
-                      Users.create({
-                        email: req.param('email')
-                      }).exec(function (err, newUser) {
-                        return res.json({
-                          username: newUser.id
-                        });
-                      });
+    var allowedParameters = [
+      "email"
+    ]
 
-                    }
-                    return res.json({
-                      username: foundUser.id
-                    });
-            return res.json(foundUser);
-          });*/
+    var data = _.pick(req.body, allowedParameters);
+
+    sails.log('Email is:', req.body.email);
+
+    Users.findOne({
+        email: req.body.email,
+      })
+      .exec(function (err, finn) {
+        if (err) {
+          return ResponseService.json(400, res, "User could not be created", err.Errors);
+        }
+        sails.log('Finn is:', finn);
+        //new user: add
+        //old user: fetch
+        if (!finn) {
+          Users.create({
+            email: 'Finn@gmail.com'
+          }).exec(function (err, newUser) {
+            if (err) {
+              return res.serverError(err);
+            }
+            sails.log('newUser is:', newUser);
+            return res.json(newUser);
+          });
+
+        } else {
+          return res.json(finn);
+        }
+
+
+      });
+
   },
 };

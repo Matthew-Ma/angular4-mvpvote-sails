@@ -1,46 +1,21 @@
-import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-declare let Chart: any;
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { NgModule, Component } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ChartModule } from 'angular2-highcharts';
+
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './chart.component.html'
 })
-export class BarChartComponent implements OnInit {
-  @ViewChild('donut') donut: ElementRef;
-  constructor() { }
-
-  ngOnInit() {
-    const donutCtx = this.donut.nativeElement.getContext('2d');
-
-    const data = {
-      labels: [
-        'Value A',
-        'Value B'
-      ],
-      datasets: [
-        {
-          'data': [101342, 55342],   // Example data
-          'backgroundColor': [
-            '#1fc8f8',
-            '#76a346'
-          ]
-        }]
+export class BarChartComponent {
+  options: any;
+  constructor() {
+    this.options = {
+      title: { text: 'simple chart' },
+      series: [{
+        data: [29.9, 71.5, 106.4, 129.2],
+      }]
     };
-
-    const chart = new Chart(
-      donutCtx,
-      {
-        'type': 'doughnut',
-        'data': data,
-        'options': {
-          'cutoutPercentage': 50,
-          'animation': {
-            'animateScale': true,
-            'animateRotate': false
-          }
-        }
-      }
-    );
   }
 
 }

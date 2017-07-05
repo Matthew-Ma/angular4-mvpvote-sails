@@ -12,6 +12,9 @@ import { AppComponent } from './app.component';
 import { MdMenuModule, MdTabsModule, MdInputModule } from '@angular/material';
 import 'hammerjs';
 
+import { ChartModule } from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+
 import { SearchPipe } from './ranking-list/search.pipe';
 import { SortPipe } from './ranking-list/sort.pipe';
 
@@ -21,11 +24,19 @@ import { PlayersComponent } from './players/players.component';
 import { BarChartComponent } from './chart/chart.component';
 import { TeamsComponent } from './teams/teams.component';
 
+import { AuthenticationService } from './signup/authentication.service';
+import { UserService } from './signup/user.service';
 import { TeamsService } from './teams/teams.service';
 import { SignupComponent } from './signup/signup.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
 
-import { HighlightDirective } from './ranking-list/highlight.directive'
+import { HighlightDirective } from './ranking-list/highlight.directive';
+
+
+declare var require: any;
+export function highchartsFactory() {
+  return require('highcharts');
+}
 
 @NgModule({
   declarations: [
@@ -39,6 +50,7 @@ import { HighlightDirective } from './ranking-list/highlight.directive'
     SortPipe,
     RankingListComponent,
     HighlightDirective,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +61,17 @@ import { HighlightDirective } from './ranking-list/highlight.directive'
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
+    ChartModule,
   ],
   providers: [
     // TeamsService, AuthGuard, ...AUTH_PROVIDERS
-    TeamsService
+    TeamsService,
+    AuthenticationService,
+    UserService,
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    },
   ],
   bootstrap: [AppComponent]
 })
