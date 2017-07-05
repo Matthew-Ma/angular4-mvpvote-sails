@@ -1,6 +1,6 @@
 <div class="signup center-block">
   <form name="form" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate>
-    <md-input-container [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <md-input-container [ngClass]="{ 'has-error': f.submitted && !email.valid }">
       <input mdInput placeholder="Enter your email" name="email" [(ngModel)]="model.email" #email="ngModel" value="" required>
       <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
     </md-input-container>

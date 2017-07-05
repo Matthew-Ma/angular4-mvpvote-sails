@@ -18,7 +18,7 @@ export class AuthenticationService {
       .map((response: Response) => {
         console.log(response.json());
         // login successful if there's a jwt token in the response
-        const token = response.json() && response.json().data.token;
+        const token = response.json() && response.json().response.data.token;
         if (token) {
           // set token property
           this.token = token;
@@ -26,7 +26,7 @@ export class AuthenticationService {
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
           console.log(localStorage.getItem('currentUser'));
-
+          console.log("dddd");
           // return true to indicate successful login
           return true;
         } else {
