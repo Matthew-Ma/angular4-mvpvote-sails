@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import * as Globals from '../globals';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService implements OnInit {
   public token: string;
-
+  Token: any;
   constructor(private http: Http) {
     // set token if saved in local storage
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -14,7 +16,7 @@ export class AuthenticationService {
   }
 
   login(email: string): Observable<boolean> {
-    return this.http.post('http://localhost:1337/api/signup', JSON.stringify({ email: email }))
+    return this.http.post(Globals.APP_SERVER + 'signup', JSON.stringify({ email: email }))
       .map((response: Response) => {
         console.log(response.json());
         // login successful if there's a jwt token in the response
@@ -26,7 +28,8 @@ export class AuthenticationService {
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
           console.log(localStorage.getItem('currentUser'));
-            // return true to indicate successful login
+
+          // return true to indicate successful login
           return true;
         } else {
           // return false to indicate failed login
@@ -41,4 +44,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
+
+  ngOnInit() {
+  }
 }

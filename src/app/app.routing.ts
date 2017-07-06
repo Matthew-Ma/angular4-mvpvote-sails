@@ -7,24 +7,27 @@ import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
 import { SignupComponent } from './signup/signup.component';
 import { BarChartComponent } from './chart/chart.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { AuthGuard } from './common/auth.guard';
 
 const routes: Routes = [
-  { path: 'chart', component: BarChartComponent },
-  { path: '', redirectTo: '/players', pathMatch: 'full' },
+  { path: 'chart', component: BarChartComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/players', pathMatch: 'full', canActivate: [AuthGuard] },
   {
-    path: 'ranking', children: [
+    path: 'ranking', canActivate: [AuthGuard], children: [
       { path: 'list', component: RankingListComponent },
       { path: '', component: TeamsComponent, outlet: 'header' },
     ]
   },
   {
-    path: 'players', children: [
+    path: 'players', canActivate: [AuthGuard], children: [
       { path: 'list/:id', component: PlayersComponent },
       { path: '', component: TeamsComponent, outlet: 'header' },
     ]
   },
   { path: 'signup', component: SignupComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: 'statistics', component: StatisticsComponent },
+  { path: '**', canActivate: [AuthGuard], component: PageNotFoundComponent },
 ];
 
 @NgModule({

@@ -3,13 +3,14 @@ import { NgModule, enableProdMode } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { AUTH_PROVIDERS, JwtHelper } from 'angular2-jwt';
 import { AuthGuard } from './common/auth.guard';
 
 import { AppComponent } from './app.component';
 
-import { MdMenuModule, MdTabsModule, MdInputModule, MdButtonModule, MdProgressSpinnerModule,MdIconModule } from '@angular/material';
+import { MdMenuModule, MdTabsModule, MdInputModule, MdButtonModule, MdProgressSpinnerModule, MdIconModule } from '@angular/material';
 import 'hammerjs';
 
 import { ChartModule } from 'angular2-highcharts';
@@ -31,6 +32,8 @@ import { SignupComponent } from './signup/signup.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
 
 import { HighlightDirective } from './ranking-list/highlight.directive';
+import { provideAuth } from 'angular2-jwt';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 declare var require: any;
@@ -51,7 +54,8 @@ export function highchartsFactory() {
     RankingListComponent,
     HighlightDirective,
     BarChartComponent,
-  ],
+    StatisticsComponent
+],
   imports: [
     BrowserModule,
     MdMenuModule,
@@ -65,12 +69,17 @@ export function highchartsFactory() {
     ChartModule,
     MdProgressSpinnerModule,
     MdIconModule,
+    HttpModule,
+    NgxDatatableModule,
   ],
   providers: [
-    // TeamsService, AuthGuard, ...AUTH_PROVIDERS
+    provideAuth({
+      headerPrefix: 'JWT'
+    }),
     TeamsService,
     AuthenticationService,
     UserService,
+    AuthGuard,
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
