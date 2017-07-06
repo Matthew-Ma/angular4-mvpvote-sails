@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
 import * as Globals from '../globals';
 
 @Injectable()
@@ -18,9 +19,11 @@ export class AuthenticationService implements OnInit {
   login(email: string): Observable<boolean> {
     return this.http.post(Globals.APP_SERVER + 'signup', JSON.stringify({ email: email }))
       .map((response: Response) => {
-        console.log(response.json());
+        console.log(response);
         // login successful if there's a jwt token in the response
         const token = response.json() && response.json().response.data.token;
+        console.log(token);
+
         if (token) {
           // set token property
           this.token = token;
@@ -35,7 +38,7 @@ export class AuthenticationService implements OnInit {
           // return false to indicate failed login
           return false;
         }
-      });
+      }).catch(this.handleError);
   }
 
   logout(): void {
@@ -44,6 +47,14 @@ export class AuthenticationService implements OnInit {
     localStorage.removeItem('currentUser');
   }
 
+  private handleError(error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We"d also dig deeper into the error to get a better message
+    const errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
+  }
 
   ngOnInit() {
   }

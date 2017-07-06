@@ -7,6 +7,7 @@
 var _ = require('lodash');
 module.exports = {
   signup: function (req, res) {
+    console.log(req);
 
     var allowedParameters = [
       "email"

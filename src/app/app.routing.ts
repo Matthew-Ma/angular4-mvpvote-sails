@@ -12,7 +12,7 @@ import { AuthGuard } from './common/auth.guard';
 
 const routes: Routes = [
   { path: 'chart', component: BarChartComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/players', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/ranking', pathMatch: 'full', canActivate: [AuthGuard] },
   {
     path: 'ranking', canActivate: [AuthGuard], children: [
       { path: 'list', component: RankingListComponent },
