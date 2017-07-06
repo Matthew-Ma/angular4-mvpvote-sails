@@ -9,7 +9,7 @@ import { AuthGuard } from './common/auth.guard';
 
 import { AppComponent } from './app.component';
 
-import { MdMenuModule, MdTabsModule, MdInputModule } from '@angular/material';
+import { MdMenuModule, MdTabsModule, MdInputModule, MdButtonModule, MdProgressSpinnerModule,MdIconModule } from '@angular/material';
 import 'hammerjs';
 
 import { ChartModule } from 'angular2-highcharts';
@@ -57,11 +57,14 @@ export function highchartsFactory() {
     MdMenuModule,
     MdTabsModule,
     MdInputModule,
+    MdButtonModule,
     AppRoutingModule,
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
     ChartModule,
+    MdProgressSpinnerModule,
+    MdIconModule,
   ],
   providers: [
     // TeamsService, AuthGuard, ...AUTH_PROVIDERS
