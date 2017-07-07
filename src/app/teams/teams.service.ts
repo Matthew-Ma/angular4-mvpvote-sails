@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import * as Globals from '../globals';
 
 import { ITeam } from './teams';
 import { IPlayer } from './players';
@@ -13,13 +13,13 @@ import { IPlayer } from './players';
 @Injectable()
 export class TeamsService {
 
-  private _teamsUrl = 'http://localhost:1337/teams';
-  private _playersUrl = 'http://localhost:1337/players';
+  private _teamsUrl = Globals.APP_URL + 'teams';
+  private _playersUrl = Globals.APP_URL + 'players';
 
-  constructor(private _http: Http) { }
+  constructor(private http: Http) { }
 
   getTeams(): Observable<ITeam[]> {
-    return this._http.get(this._teamsUrl)
+    return this.http.get(this._teamsUrl)
       .map((response: Response) => <ITeam[]>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
@@ -33,10 +33,22 @@ export class TeamsService {
   }
 
   getPlayers(): Observable<IPlayer[]> {
-    return this._http.get(this._playersUrl)
+    return this.http.get(this._playersUrl)
       .map((response: Response) => <IPlayer[]>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
+  }
+
+  vote(playerID: number): Observable<boolean> {
+    return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID }))
+      .map((response: Response) => response.json())
+      .do(data => {
+        if (data) {
+          return true;
+        } else {
+          return false;
+        }
+      }).catch(this.handleError);
   }
 
   private handleError(error: Response) {

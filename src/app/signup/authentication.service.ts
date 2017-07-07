@@ -19,7 +19,6 @@ export class AuthenticationService implements OnInit {
   login(email: string): Observable<boolean> {
     return this.http.post(Globals.APP_SERVER + 'signup', JSON.stringify({ email: email }))
       .map((response: Response) => {
-        console.log(response);
         // login successful if there's a jwt token in the response
         const token = response.json() && response.json().response.data.token;
         console.log(token);
@@ -53,7 +52,7 @@ export class AuthenticationService implements OnInit {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+    return Observable.throw(false);
   }
 
   ngOnInit() {

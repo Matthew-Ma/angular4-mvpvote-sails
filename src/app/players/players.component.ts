@@ -21,11 +21,24 @@ export class PlayersComponent implements OnInit, OnDestroy {
   showImage = false;
   errorMessage: string;
   private sub: Subscription;
+  voted = false;
+  playerID: number;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _teamService: TeamsService) { }
+  constructor(private _route: ActivatedRoute, private _router: Router, private teamService: TeamsService) { }
 
   onVoteClicked(message: string): void {
     this.pageTitle = 'Product List: ' + message;
+  }
+
+  vote(playerID): void {
+    this.playerID = playerID;
+    this.teamService.vote(this.playerID)
+      .subscribe(result => {
+
+      }, err => {
+        console.log(err);
+      });
+
   }
 
   toggleImage(): void {
@@ -45,7 +58,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
   }
 
   getTeam(id: number) {
-    this._teamService.getTeam(id).subscribe(
+    this.teamService.getTeam(id).subscribe(
       team => this.team = team,
       error => this.errorMessage = <any>error);
   }

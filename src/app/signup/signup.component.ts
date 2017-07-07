@@ -11,6 +11,7 @@ export class SignupComponent implements OnInit {
   model: any = {};
   loading = false;
   error = '';
+  requiredError = `Email is required`;
 
   constructor(
     private router: Router,
@@ -31,6 +32,12 @@ export class SignupComponent implements OnInit {
           this.error = 'Email is incorrect';
           this.loading = false;
         }
+      }, err => {
+        console.log(err);
+
+        // login failed
+        this.error = 'Email is incorrect';
+        this.loading = false;
       });
   }
 

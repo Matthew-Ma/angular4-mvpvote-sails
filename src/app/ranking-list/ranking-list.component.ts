@@ -29,7 +29,7 @@ export class RankingListComponent implements OnInit {
 
   playerID: number;
 
-  constructor(private _teamService: TeamsService) { }
+  constructor(private teamService: TeamsService) { }
 
   sort(property): void {
     this.isDesc = !this.isDesc;
@@ -44,12 +44,19 @@ export class RankingListComponent implements OnInit {
 
   vote(playerID): void {
     this.playerID = playerID;
-    console.log(playerID);
+    this.teamService.vote(this.playerID)
+      .subscribe(result => {
+
+        this.getAllPlayers();
+
+      }, err => {
+        console.log(err);
+      });
 
   }
 
-  ngOnInit() {
-    this._teamService.getPlayers().subscribe(
+  private getAllPlayers(): void {
+    this.teamService.getPlayers().subscribe(
       players => this.players = players.sort((n1, n2) => {
         if (n1.votes > n2.votes) {
           return 1;
@@ -63,6 +70,10 @@ export class RankingListComponent implements OnInit {
       }),
       error => this.errorMessage = <any>error
     );
+  }
+
+  ngOnInit() {
+    this.getAllPlayers();
   }
 
 }

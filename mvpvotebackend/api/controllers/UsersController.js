@@ -21,6 +21,14 @@ module.exports = {
         email: req.body.email,
       })
       .exec(function (err, finn) {
+
+        if (err) {
+          if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0] && err.invalidAttributes.email[0].rule === 'email') {
+            return res.send(409, 'Email address is already taken by another user, please try again.');
+          }
+        }
+
+
         if (err) {
           return ResponseService.json(400, res, "User could not be created", err.Errors);
         }

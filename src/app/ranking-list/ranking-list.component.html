@@ -16,16 +16,16 @@
       <table class='table' *ngIf='players && players.length'>
         <thead>
           <tr>
-            <th (click)="sort('idx')" >Ranking</th>
+            <th>Ranking</th>
             <th>Player</th>
             <th>Team</th>
             <th>Votes</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let player of players | search: searchText| sort; let idx = index' appHighlight>
+          <tr *ngFor='let player of players | search: searchText; let idx = index' appHighlight>
             <td>
-              {{ idx+1 }}
+              <i class="material-icons">star</i>{{ idx+1 }}
             </td>
             <td>
               <img *ngIf='showImage' [src]="'./assets/img/' + player.image" [title]='player.name | uppercase' [style.width.px]='imageWidth'
@@ -39,7 +39,9 @@
             </td>
             <td>{{ player.votes }}</td>
             <td>
-              <button class='btn btn-primary' (click)='vote(player.id)' >vote</button>
+              <a md-raised-button routerLink=".">Raised button</a>
+              <button [disabled]="loading" class="btn btn-primary">Submit</button>
+              <button class='btn btn-primary' (click)='vote(player.id)'>vote</button>
             </td>
           </tr>
         </tbody>

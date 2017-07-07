@@ -46,5 +46,6 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  'POST /api/signup': 'UsersController.signup'
+  'POST /api/signup': 'UsersController.signup',
+  'POST /api/vote': 'PlayersController.vote',
 };
