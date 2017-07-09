@@ -21,6 +21,7 @@ export class AuthenticationService implements OnInit {
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         const token = response.json() && response.json().response.data.token;
+        const voted = response.json() && response.json().response.data.voted;
         console.log(token);
 
         if (token) {
@@ -28,7 +29,7 @@ export class AuthenticationService implements OnInit {
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
+          localStorage.setItem('currentUser', JSON.stringify({ email: email, voted: voted, token: token }));
           console.log(localStorage.getItem('currentUser'));
 
           // return true to indicate successful login

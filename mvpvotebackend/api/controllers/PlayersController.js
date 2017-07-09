@@ -43,7 +43,20 @@ module.exports = {
               id: updated[0].id,
               byTeams: updated[0].byTeams
             }
+
             sails.log('updated is:', updated);
+
+            Users.update({
+              email: req.body.currentUser
+            }, {
+              voted: 1
+            }).exec(function (err, updated) {
+              if (err) {
+                return res.serverError(err);
+              }
+              sails.log('updated is:', updated);
+            });
+
             return ResponseService.json(200, res, "User updated", responseData);
           });
 

@@ -39,8 +39,8 @@ export class TeamsService {
       .catch(this.handleError);
   }
 
-  vote(playerID: number): Observable<boolean> {
-    return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID }))
+  vote(playerID: number, currentUser: string): Observable<boolean> {
+    return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID, currentUser: currentUser }))
       .map((response: Response) => response.json())
       .do(data => {
         if (data) {

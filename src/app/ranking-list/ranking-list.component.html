@@ -41,7 +41,7 @@
             <td>
               <a md-raised-button routerLink=".">Raised button</a>
               <button [disabled]="loading" class="btn btn-primary">Submit</button>
-              <button class='btn btn-primary' (click)='vote(player.id)'>vote</button>
+              <button [disabled]="voted" class='btn btn-primary' (click)='vote(player.id)'>vote</button>
             </td>
           </tr>
         </tbody>

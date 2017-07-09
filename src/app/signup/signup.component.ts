@@ -1,26 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
-  model: any = {};
+
   loading = false;
-  error = '';
-  requiredError = `Email is required`;
+  error = false;
+
+  loginForm: FormGroup;
+  emailFormControl: FormControl;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    builder: FormBuilder
+  ) {
+    this.emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.pattern(EMAIL_REGEX)
+    ]);
+    this.loginForm = builder.group({
+      email: this.emailFormControl
+    });
+  }
 
   signup() {
     event.preventDefault();
     this.loading = true;
-    this.authenticationService.login(this.model.email)
+    this.authenticationService.login(this.loginForm.value.email)
       .subscribe(result => {
         console.log(result);
 
@@ -29,14 +45,14 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/ranking']);
         } else {
           // login failed
-          this.error = 'Email is incorrect';
+          this.error = true;
           this.loading = false;
         }
       }, err => {
         console.log(err);
 
         // login failed
-        this.error = 'Email is incorrect';
+        this.error = true;
         this.loading = false;
       });
   }

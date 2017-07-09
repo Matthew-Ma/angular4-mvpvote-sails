@@ -1,17 +1,19 @@
 <div class="signup center-block">
-  <form name="form" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate>
-    <md-input-container [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-      <input mdInput placeholder="Enter your email" name="email" [(ngModel)]="model.email" #email="ngModel" value="" required>
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="signup()" novalidate>
+    <md-input-container class="example-full-width">
+      <input mdInput [formControl]="emailFormControl" placeholder="Enter your email" name="email" id="email" required>
+      <md-error *ngIf="emailFormControl.hasError('pattern')">
+        Please enter a valid email address
+      </md-error>
+      <md-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </md-error>
+      <md-error *ngIf="error">
+        <strong>{{error}}</strong>
+      </md-error>
     </md-input-container>
-    <button [disabled]="loading" class="btn btn-primary">Submit</button>
-    <md-chip-list>
-      <md-chip *ngIf="f.submitted && !email.valid" selected="true" color="warn">
-        {{requiredError}}
-      </md-chip>
-      <md-chip *ngIf="error" selected="true" color="warn">
-        {{error}}
-      </md-chip>
-    </md-chip-list>
+    <button [disabled]="loading||error||emailFormControl.hasError('pattern')||emailFormControl.hasError('required')" type="submit"
+      class="btn btn-lg btn-primary">Sign up</button>
     <md-spinner *ngIf="loading"></md-spinner>
   </form>
 </div>

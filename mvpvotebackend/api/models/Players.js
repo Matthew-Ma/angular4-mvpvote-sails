@@ -11,6 +11,21 @@ module.exports = {
     name: {
       type: 'string'
     },
+    pos: {
+      type: 'string'
+    },
+    ht: {
+      type: 'string'
+    },
+    wt: {
+      type: 'string'
+    },
+    exp: {
+      type: 'number'
+    },
+    country: {
+      type: 'string'
+    },
     image: {
       type: 'string'
     },

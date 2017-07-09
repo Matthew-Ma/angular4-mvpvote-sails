@@ -23,6 +23,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   voted = false;
   playerID: number;
+  currentUser: string;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private teamService: TeamsService) { }
 
@@ -32,7 +33,9 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
   vote(playerID): void {
     this.playerID = playerID;
-    this.teamService.vote(this.playerID)
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).email;
+
+    this.teamService.vote(this.playerID, this.currentUser)
       .subscribe(result => {
 
       }, err => {

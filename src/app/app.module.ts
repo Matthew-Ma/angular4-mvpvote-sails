@@ -2,11 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode } from '@angular/core';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { AuthGuard } from './common/auth.guard';
+
+import { NgPipesModule } from 'ngx-pipes';
 
 import { AppComponent } from './app.component';
 
@@ -68,6 +70,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     StatisticsComponent
   ],
   imports: [
+    NgPipesModule,
     BrowserModule,
     MdMenuModule,
     MdTabsModule,
@@ -76,6 +79,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ChartModule,
     MdProgressSpinnerModule,

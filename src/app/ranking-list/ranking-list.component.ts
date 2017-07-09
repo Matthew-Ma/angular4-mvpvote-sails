@@ -26,8 +26,10 @@ export class RankingListComponent implements OnInit {
   isDesc = false;
   column: string;
   direction = 1;
+  voted = false;
 
   playerID: number;
+  currentUser: string;
 
   constructor(private teamService: TeamsService) { }
 
@@ -44,10 +46,13 @@ export class RankingListComponent implements OnInit {
 
   vote(playerID): void {
     this.playerID = playerID;
-    this.teamService.vote(this.playerID)
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).email;
+
+    this.teamService.vote(this.playerID, this.currentUser)
       .subscribe(result => {
 
         this.getAllPlayers();
+        this.voted = true;
 
       }, err => {
         console.log(err);
@@ -59,11 +64,11 @@ export class RankingListComponent implements OnInit {
     this.teamService.getPlayers().subscribe(
       players => this.players = players.sort((n1, n2) => {
         if (n1.votes > n2.votes) {
-          return 1;
+          return -1;
         }
 
         if (n1.votes < n2.votes) {
-          return -1;
+          return 1;
         }
 
         return 0;
