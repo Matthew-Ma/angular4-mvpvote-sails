@@ -37,7 +37,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
     this.teamService.vote(this.playerID, this.currentUser)
       .subscribe(result => {
-
+        this.voted = true;
       }, err => {
         console.log(err);
       });

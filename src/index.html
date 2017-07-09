@@ -5,8 +5,26 @@
   <meta charset="utf-8">
   <title>Mvpvote</title>
   <base href="/">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="assets/dist/css/bootstrap-material-design.css">
+  <link rel="stylesheet" type="text/css" href="assets/dist/css/ripples.min.css">
+
+  <!-- Dropdown.js -->
+  <link href="//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
+
+  {#<!-- Page style -->
+  <link href="index.css" rel="stylesheet">#}
+
+  <!-- jQuery -->
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -17,5 +35,120 @@
     <app-root></app-root>
 
 </body>
+<!-- Open source code -->
+<script>
+  window.page = window.location.hash || "#about";
 
+  $(document).ready(function () {
+    if (window.page != "#about") {
+      $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+    }
+  });
+
+  $(window).on("resize", function () {
+    $("html, body").height($(window).height());
+    $(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+    $(".pages").height($(window).height());
+  }).trigger("resize");
+
+  $(".menu li").click(function () {
+    // Menu
+    if (!$(this).data("target")) return;
+    if ($(this).is(".active")) return;
+    $(".menu li").not($(this)).removeClass("active");
+    $(".page").not(page).removeClass("active").hide();
+    window.page = $(this).data("target");
+    var page = $(window.page);
+    window.location.hash = window.page;
+    $(this).addClass("active");
+
+
+    page.show();
+
+    var totop = setInterval(function () {
+      $(".pages").animate({scrollTop: 0}, 0);
+    }, 1);
+
+    setTimeout(function () {
+      page.addClass("active");
+      setTimeout(function () {
+        clearInterval(totop);
+      }, 1000);
+    }, 100);
+  });
+
+  function cleanSource(html) {
+    var lines = html.split(/\n/);
+
+    lines.shift();
+    lines.splice(-1, 1);
+
+    var indentSize = lines[0].length - lines[0].trim().length,
+        re = new RegExp(" {" + indentSize + "}");
+
+    lines = lines.map(function (line) {
+      if (line.match(re)) {
+        line = line.substring(indentSize);
+      }
+
+      return line;
+    });
+
+    lines = lines.join("\n");
+
+    return lines;
+  }
+
+  $("#opensource").click(function () {
+    $.get(window.location.href, function (data) {
+      var html = $(data).find(window.page).html();
+      html = cleanSource(html);
+      $("#source-modal pre").text(html);
+      $("#source-modal").modal();
+    });
+  });
+</script>
+
+<!-- Twitter Bootstrap -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Material Design for Bootstrap -->
+<script src="assets/dist/js/material.js"></script>
+<script src="assets/dist/js/ripples.min.js"></script>
+<script>
+  $.material.init();
+</script>
+
+
+<!-- Sliders -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+<script>
+  $(function () {
+    $.material.init();
+    $(".shor").noUiSlider({
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+
+    $(".svert").noUiSlider({
+      orientation: "vertical",
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+  });
+</script>
+
+<!-- Dropdown.js -->
+<script src="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
+<script>
+  $("#dropdown-menu select").dropdown();
+</script>
 </html>
