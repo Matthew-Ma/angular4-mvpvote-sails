@@ -9,7 +9,6 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
 
@@ -42,7 +41,7 @@ export class SignupComponent implements OnInit {
 
         if (result === true) {
           // login successful
-          this.router.navigate(['/ranking']);
+          this.router.navigate(['/ranking/list']);
         } else {
           // login failed
           this.error = true;

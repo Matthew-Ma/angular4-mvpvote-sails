@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { contentHeaders } from '../common/headers';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,7 +11,7 @@ import { TeamsService } from '../teams/teams.service';
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
-  styleUrls: ['./players.component.css']
+  styleUrls: ['./players.component.css'],
 })
 export class PlayersComponent implements OnInit, OnDestroy {
 
@@ -37,7 +36,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
     this.teamService.vote(this.playerID, this.currentUser)
       .subscribe(result => {
-        this.voted = true;
+        localStorage.setItem('voted', JSON.stringify(1));
+        if (+localStorage.getItem('voted') === 1) {
+          this.voted = true;
+        }
       }, err => {
         console.log(err);
       });
@@ -54,6 +56,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
         const id = +params['id'];
         this.getTeam(id);
       });
+
+    if (+localStorage.getItem('voted') === 1) {
+      this.voted = true;
+    }
   }
 
   ngOnDestroy() {

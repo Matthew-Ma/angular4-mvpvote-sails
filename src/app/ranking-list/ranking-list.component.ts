@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { contentHeaders } from '../common/headers';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,6 +12,7 @@ import { TeamsService } from '../teams/teams.service';
   selector: 'app-ranking-list',
   templateUrl: './ranking-list.component.html',
   styleUrls: ['./ranking-list.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class RankingListComponent implements OnInit {
 
@@ -52,7 +52,11 @@ export class RankingListComponent implements OnInit {
       .subscribe(result => {
 
         this.getAllPlayers();
-        this.voted = true;
+
+        localStorage.setItem('voted', JSON.stringify(1));
+        if (+localStorage.getItem('voted') === 1) {
+          this.voted = true;
+        }
 
       }, err => {
         console.log(err);
@@ -79,6 +83,9 @@ export class RankingListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPlayers();
+    if (localStorage.getItem('voted') === 'true') {
+      this.voted = true;
+    }
   }
 
 }

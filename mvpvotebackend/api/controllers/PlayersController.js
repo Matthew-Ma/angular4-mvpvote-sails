@@ -16,6 +16,7 @@ module.exports = {
 
     var data = _.pick(req.body, allowedParameters);
 
+
     sails.log('playerID is:', req.body.playerID);
 
     Players.findOne({

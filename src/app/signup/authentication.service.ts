@@ -23,14 +23,16 @@ export class AuthenticationService implements OnInit {
         const token = response.json() && response.json().response.data.token;
         const voted = response.json() && response.json().response.data.voted;
         console.log(token);
-
+        console.log(voted);
         if (token) {
           // set token property
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ email: email, voted: voted, token: token }));
+          localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
+          localStorage.setItem('voted', voted);
           console.log(localStorage.getItem('currentUser'));
+          console.log(localStorage.getItem('voted'));
 
           // return true to indicate successful login
           return true;

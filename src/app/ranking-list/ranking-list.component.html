@@ -20,6 +20,9 @@
             <th>Player</th>
             <th>Team</th>
             <th>Votes</th>
+            <th>Position</th>
+            <th>County</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +41,12 @@
               <ng-container>{{ player.byTeams.name }}</ng-container>
             </td>
             <td>{{ player.votes }}</td>
+            <td>{{ player.pos }}</td>
+            <td>
+              <img *ngIf='showImage' [src]="'./assets/img/' + player.country+'.png'" [title]='player.byTeams.name | uppercase' [style.width.px]='imageWidth'
+                [style.margin.px]='imageMargin'>
+              <ng-container>{{ player.country }}</ng-container>
+            </td>
             <td>
               <a md-raised-button routerLink=".">Raised button</a>
               <button [disabled]="loading" class="btn btn-primary">Submit</button>
@@ -49,7 +58,7 @@
     </div>
   </div>
 </div>
-<h1 class="header">Navbar</h1>
+<!--h1 class="header">Navbar</h1>
 
 <div class="navbar navbar-default">
   <div class="container-fluid">
@@ -204,7 +213,7 @@
   </div>
 </div>
 
-<div class="navbar navbar-info">
+<div-- class="navbar navbar-info">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-material-light-blue-collapse">
@@ -253,4 +262,4 @@
       </ul>
     </div>
   </div>
-</div>
+</div-->

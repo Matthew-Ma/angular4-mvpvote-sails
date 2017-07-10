@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map'
 
 import { AuthenticationService } from './authentication.service';
 import { User } from './user';
+import { options } from '../common/headers';
 
 @Injectable()
 export class UserService {
@@ -14,9 +15,9 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    // add authorization header with jwt token
-    const headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
-    const options = new RequestOptions({ headers: headers });
+    // // add authorization header with jwt token
+    // const headers = new Headers({ 'Authorization': this.authenticationService.token });
+    // const options = new RequestOptions({ headers: headers });
 
     // get users from api
     return this.http.get('/api/users', options)

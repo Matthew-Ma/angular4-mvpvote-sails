@@ -44,6 +44,8 @@ import { RankingListComponent } from './ranking-list/ranking-list.component';
 import { HighlightDirective } from './ranking-list/highlight.directive';
 import { provideAuth } from 'angular2-jwt';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { SeasonComponent } from './season/season.component';
+import { AwardsComponent } from './awards/awards.component';
 
 
 declare var require: any;
@@ -68,6 +70,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HighlightDirective,
     BarChartComponent,
     StatisticsComponent
+    ,
+    SeasonComponent,
+    AwardsComponent
   ],
   imports: [
     NgPipesModule,

@@ -66,6 +66,7 @@ module.exports.cors = {
 
   // methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
 
+
   /***************************************************************************
   *                                                                          *
   * Which headers should be allowed for CORS requests? This is only used in  *

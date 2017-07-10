@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import * as Globals from '../globals';
+import { options } from '../common/headers';
 
 import { ITeam } from './teams';
 import { IPlayer } from './players';
@@ -15,6 +16,7 @@ export class TeamsService {
 
   private _teamsUrl = Globals.APP_URL + 'teams';
   private _playersUrl = Globals.APP_URL + 'players';
+  private token: string;
 
   constructor(private http: Http) { }
 
@@ -40,7 +42,7 @@ export class TeamsService {
   }
 
   vote(playerID: number, currentUser: string): Observable<boolean> {
-    return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID, currentUser: currentUser }))
+    return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID, currentUser: currentUser }), options)
       .map((response: Response) => response.json())
       .do(data => {
         if (data) {

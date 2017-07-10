@@ -46,7 +46,8 @@ module.exports = {
               user: newUser,
               token: JwtService.issue({
                 id: newUser.id
-              })
+              }),
+              voted: 0
             }
             sails.log('newUser is:', newUser);
             return ResponseService.json(200, res, "User created", responseData);
@@ -57,7 +58,8 @@ module.exports = {
             user: finn,
             token: JwtService.issue({
               id: finn.id
-            })
+            }),
+            voted: finn.voted
           }
           return ResponseService.json(200, res, "User fetched", responseData);
         }
