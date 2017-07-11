@@ -14,8 +14,8 @@ export class SignupComponent implements OnInit {
 
   loading = false;
   ServerEmailError = false;
- 
-   loginForm: FormGroup;
+
+  loginForm: FormGroup;
   emailFormControl: FormControl;
 
   constructor(
