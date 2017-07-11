@@ -8,16 +8,6 @@ import { ChartModule } from 'angular2-highcharts';
   templateUrl: './chart.component.html'
 })
 export class BarChartComponent {
-  // options: any;
-  // constructor() {
-  //   this.options = {
-  //     title: { text: 'simple chart' },
-  //     series: [{
-  //       data: [29.9, 71.5, 106.4, 129.2],
-  //     }]
-  //   };
-  // }
-
   options: Object;
   constructor() {
     this.options = {
@@ -36,9 +26,6 @@ export class BarChartComponent {
     series: [{
         name: 'John',
         data: [5, 3, 4, 7, 2]
-    }, {
-        name: 'Jane',
-        data: [2, -2, -3, 2, 1]
     }, {
         name: 'Joe',
         data: [3, 4, 4, -2, 5]

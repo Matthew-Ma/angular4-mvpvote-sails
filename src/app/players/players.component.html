@@ -9,7 +9,7 @@
               [style.margin.px]='imageMargin'>
             <ng-container>{{ player.name }}</ng-container>
             {{player.votes}}
-            <button [disabled]="voted" (click)='vote(player.id)' class="btn btn-primary">Vote</button>
+            <button [disabled]="voted" (click)='vote(player.id)' class="btn btn-lg btn-raised btn-primary">Vote</button>
           </div>
 
           <div class="col-sm-4">
