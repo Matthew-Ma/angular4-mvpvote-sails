@@ -5,8 +5,7 @@
         <div class="row">
 
           <div class="col-sm-4">
-            <img *ngIf='showImage' [src]="'./assets/img/' + player.image" [title]='player.name | uppercase' [style.width.px]='imageWidth'
-              [style.margin.px]='imageMargin'>
+            <img [src]="'./assets/img/' + player.image" [title]='player.name | uppercase' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
             <ng-container>{{ player.name }}</ng-container>
             {{player.votes}}
             <button [disabled]="voted" (click)='vote(player.id)' class="btn btn-lg btn-raised btn-primary">Vote</button>

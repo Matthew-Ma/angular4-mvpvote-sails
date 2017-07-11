@@ -15,20 +15,20 @@ export class BarChartComponent {
         type: 'column'
     },
     title: {
-        text: 'Column chart with negative values'
+        text: 'LEAGUE COMPARISON'
     },
     xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+        categories: ['PPG', 'RPG', 'APG', 'FT%', '3P%']
     },
     credits: {
         enabled: false
     },
     series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2]
+        name: 'Player',
+        data: [34.4, 9.7, 7.1, 72.8%, 46.8%]
     }, {
-        name: 'Joe',
-        data: [3, 4, 4, -2, 5]
+        name: 'League Avg.',
+        data: [9.6, 3.8, 2, 77.5%, 33.5%]
     }]
     }
   }
