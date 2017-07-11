@@ -11,7 +11,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { AuthGuard } from './common/auth.guard';
 
 const routes: Routes = [
-  { path: 'chart', component: BarChartComponent, canActivate: [AuthGuard] },
+  { path: 'chart', component: BarChartComponent },
   { path: '', redirectTo: '/ranking', pathMatch: 'full', canActivate: [AuthGuard] },
   {
     path: 'ranking', canActivate: [AuthGuard], children: [

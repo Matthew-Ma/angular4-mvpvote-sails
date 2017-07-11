@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.loginForm.value.email)
       .subscribe(result => {
-        console.log(result);
+
 
         if (result === true) {
           // login successful
@@ -46,9 +46,10 @@ export class SignupComponent implements OnInit {
           // login failed
           this.error = true;
           this.loading = false;
+
         }
       }, err => {
-        console.log(err);
+
 
         // login failed
         this.error = true;

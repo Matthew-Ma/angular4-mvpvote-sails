@@ -4,7 +4,7 @@ var jwtSecret = sails.config.secrets.jwtSecret;
 module.exports = {
   issue: function (payload) {
     token = jwt.sign(payload, jwtSecret, {
-      expiresIn: 10 * 60
+      expiresIn: 30 * 60
     })
     return token
   },
