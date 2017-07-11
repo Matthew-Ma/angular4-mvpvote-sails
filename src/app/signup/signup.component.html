@@ -6,14 +6,14 @@
     <div class="form-group label-floating">
       <label for="f1" class="control-label">Enter your email</label>
       <input type="email" [formControl]="emailFormControl" name="email" id="email" class="form-control">
-      <span class="has-warning help-block" *ngIf="emailFormControl.hasError('pattern')"><strong>Please enter a valid email address</strong></span>
+      <span class="has-warning help-block" *ngIf="emailFormControl.hasError('pattern')||ServerEmailError"><strong>Please enter a valid email address</strong></span>
       <span class="has-warning help-block" *ngIf="emailFormControl.hasError('required')"><strong>Email is required</strong></span>
-      <span class="help-block" *ngIf="error"><strong>Please enter a valid email address</strong></span>
+      
     </div>
 
     <button [disabled]="loading||error||emailFormControl.hasError('pattern')||emailFormControl.hasError('required')" type="submit"
       class="btn btn-lg btn-block btn-raised btn-primary">Sign up</button>
-    
+
   </form>
   <md-spinner *ngIf="loading"></md-spinner>
 </div>

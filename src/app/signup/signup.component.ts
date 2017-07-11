@@ -13,9 +13,9 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 export class SignupComponent implements OnInit {
 
   loading = false;
-  error = false;
-
-  loginForm: FormGroup;
+  ServerEmailError = false;
+ 
+   loginForm: FormGroup;
   emailFormControl: FormControl;
 
   constructor(
@@ -44,16 +44,18 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/ranking/list']);
         } else {
           // login failed
-          this.error = true;
+          this.ServerEmailError = true;
           this.loading = false;
+
 
         }
       }, err => {
 
 
         // login failed
-        this.error = true;
+        this.ServerEmailError = true;
         this.loading = false;
+        console.log(this.ServerEmailError);
       });
   }
 
