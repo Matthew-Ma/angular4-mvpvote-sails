@@ -1,14 +1,20 @@
-<div class="example-container">
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-  <md-icon>more_vert</md-icon>
-</button>
-  <md-menu #menu="mdMenu">
-    <button (click)="logout()" md-menu-item>
-    <md-icon>account_circle</md-icon>
-    <span>Logout</span>
-  </button>
-  </md-menu>
-
-  <button routerLink="/ranking/list" md-button>Ranking List</button>
-  <button *ngFor="let team of teams" routerLink="/players/list/{{team.id}}" md-button>{{team.name}}</button>
-</div>
+            <div class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                  <ul class="nav navbar-nav">
+                    <li><a href="javascript:void(0)" routerLink="/ranking/list">Ranking List</a></li>
+                    <li *ngFor="let team of teams"><a href="javascript:void(0)" routerLink="/players/list/{{team.id}}">{{team.name}}</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="javascript:void(0)" (click)="logout()"><md-icon>account_circle</md-icon>Logout</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>

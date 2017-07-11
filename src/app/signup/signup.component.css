@@ -2,24 +2,20 @@
    display: block;
    width:300px;
    height: 280px;
-   margin: 20% auto;
    background-color:white;
-}
-
-.example-form
-{
    max-width: 330px;
    padding: 15px;
-   margin: 30% auto;
+   margin: 16% auto;
    color: #ccc;
 }
 
-.help-block{
-color: #f44336 !important;
+h2 span{
+  font-weight: bolder;
+  color:#1e518c;
 }
 
 .sigup-wrapper {
-   background: url(../../assets/img/thunder-heat-finals-wallpaper.jpg) no-repeat center center fixed;
+   background: url(../../assets/img/w1.jpg) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;

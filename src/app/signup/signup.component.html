@@ -1,19 +1,21 @@
-<div class="signup center-block">
-  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="signup()" novalidate>
-  <h2>Input -
-    <small>floating label feedback variants</small>
-  </h2>
-    <div class="form-group label-floating">
-      <label for="f1" class="control-label">Enter your email</label>
-      <input type="email" [formControl]="emailFormControl" name="email" id="email" class="form-control">
-      <span class="has-warning help-block" *ngIf="emailFormControl.hasError('pattern')||ServerEmailError"><strong>Please enter a valid email address</strong></span>
-      <span class="has-warning help-block" *ngIf="emailFormControl.hasError('required')"><strong>Email is required</strong></span>
-      
-    </div>
+<div class="sigup-wrapper">
+  <div class="signup center-block">
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="signup()" novalidate>
+      <h2><span>NBA</span> MVP Voting
+        <small>Angular2 + Sails App</small>
+      </h2>
+      <div class="form-group label-floating">
+        <label for="f1" class="control-label">Enter your email</label>
+        <input type="email" [formControl]="emailFormControl" name="email" id="email" class="form-control">
+        <span class="has-warning help-block" *ngIf="emailFormControl.hasError('pattern')||ServerEmailError"><strong>Please enter a valid email address</strong></span>
+        <span class="has-warning help-block" *ngIf="emailFormControl.hasError('required')"><strong>Email is required</strong></span>
+<md-spinner [ngStyle]="{'margin': '0 auto'}" *ngIf="loading"></md-spinner>
+      </div>
 
-    <button [disabled]="loading||error||emailFormControl.hasError('pattern')||emailFormControl.hasError('required')" type="submit"
-      class="btn btn-lg btn-block btn-raised btn-primary">Sign up</button>
+      <button [disabled]="loading||error||emailFormControl.hasError('pattern')||emailFormControl.hasError('required')" type="submit"
+        class="btn btn-lg btn-block btn-raised btn-primary">Sign up</button>
 
-  </form>
-  <md-spinner *ngIf="loading"></md-spinner>
+    </form>
+    
+  </div>
 </div>
