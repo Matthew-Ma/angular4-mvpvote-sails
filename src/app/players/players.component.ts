@@ -23,6 +23,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
   voted = false;
   playerID: number;
   currentUser: string;
+  imageWidth = 190;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private teamService: TeamsService) { }
 

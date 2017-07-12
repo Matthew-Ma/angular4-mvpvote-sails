@@ -41,7 +41,7 @@
             <td><strong>{{ player.votes }}</strong></td>
             <td>{{ player.pos }}</td>
             <td>
-              <img *ngIf='showImage' [src]="'./assets/img/' + player.country+'.png'" [title]='player.byTeams.name | uppercase' [style.width.px]='imageWidth'
+              <img *ngIf='showImage' [src]="'./assets/img/' + player.country+'.ico'" [title]='player.byTeams.name | uppercase' [style.width.px]='imageWidth'
                 [style.margin.px]='imageMargin'>
               <ng-container>{{ player.country }}</ng-container>
             </td>

@@ -7,3 +7,7 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.player-wrapper{
+  padding:0 30px;
+}

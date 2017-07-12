@@ -25,10 +25,10 @@ export class BarChartComponent {
     },
     series: [{
         name: 'Player',
-        data: [34.4, 9.7, 7.1, 72.8%, 46.8%]
+        data: [34.4, 9.7, 7.1, 72.8, 46.8]
     }, {
-        name: 'League Avg.',
-        data: [9.6, 3.8, 2, 77.5%, 33.5%]
+        name: 'League',
+        data: [9.6, 3.8, 2, 77.5, 33.5]
     }]
     }
   }
