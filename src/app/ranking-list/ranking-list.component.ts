@@ -83,7 +83,7 @@ export class RankingListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPlayers();
-    if (localStorage.getItem('voted') === 'true') {
+    if (+localStorage.getItem('voted') === 1) {
       this.voted = true;
     }
   }

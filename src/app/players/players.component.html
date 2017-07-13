@@ -8,8 +8,8 @@
             <img [src]="'./assets/img/' + player.image" [title]='player.name | uppercase'>
           </div>
           <div class="col-sm-2">
-            <ng-container>{{ player.name }}</ng-container>
-            <br> Votes: {{player.votes}}
+            <h1>{{ player.name }}</h1>
+            <h3>Votes: {{player.votes}}</h3>
             <button [disabled]="voted" (click)='vote(player.id)' class="btn btn-lg btn-raised btn-primary">Vote</button>
           </div>
 
