@@ -30,7 +30,7 @@ export class AuthenticationService implements OnInit {
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
-          localStorage.setItem('voted', JSON.stringify(voted===true?1:0));
+          localStorage.setItem('voted', JSON.stringify(voted === true ? 1 : 0));
           console.log(localStorage.getItem('currentUser'));
           console.log(localStorage.getItem('voted'));
 
