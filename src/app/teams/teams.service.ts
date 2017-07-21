@@ -6,7 +6,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import * as Globals from '../globals';
-import { options } from '../common/headers';
 
 import { ITeam } from './teams';
 import { IPlayer } from './players';
@@ -42,17 +41,19 @@ export class TeamsService {
   }
 
   vote(playerID: number, currentUser: string): Observable<boolean> {
-    console.log(options);
+    const contentHeaders = new Headers();
+    const currentUserSess = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(currentUserSess, 'headers');
+    this.token = currentUserSess && currentUserSess.token;
+    contentHeaders.append('authorization', 'Bearer ' + this.token);
+    const options = new RequestOptions({ headers: contentHeaders });
 
     return this.http.post(Globals.APP_SERVER + 'vote', JSON.stringify({ playerID: playerID, currentUser: currentUser }), options)
-      .map((response: Response) => response.json())
-      .do(data => {
-        if (data) {
-          return true;
-        } else {
-          return false;
-        }
-      }).catch(this.handleError);
+      .map((response: Response) => {
+        console.log(response.json(), 'player vote');
+        return response.json().response.data.byTeams;
+      })
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {

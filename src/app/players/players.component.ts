@@ -40,6 +40,8 @@ export class PlayersComponent implements OnInit, OnDestroy {
         localStorage.setItem('voted', JSON.stringify(1));
         if (+localStorage.getItem('voted') === 1) {
           this.voted = true;
+          console.log(result,'result');
+          this.getTeam(+result);
         }
       }, err => {
         console.log(err);

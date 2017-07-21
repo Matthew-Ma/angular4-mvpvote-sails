@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TeamsComponent } from './teams/teams.component';
 import { PlayersComponent } from './players/players.component';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
@@ -12,7 +12,7 @@ import { AuthGuard } from './common/auth.guard';
 
 const routes: Routes = [
   { path: 'chart', component: BarChartComponent },
-  { path: '', redirectTo: '/ranking', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/ranking/list', pathMatch: 'full', canActivate: [AuthGuard] },
   {
     path: 'ranking', canActivate: [AuthGuard], children: [
       { path: 'list', component: RankingListComponent },
@@ -32,6 +32,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

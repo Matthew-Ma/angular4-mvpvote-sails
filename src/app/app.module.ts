@@ -36,7 +36,7 @@ import { BarChartComponent } from './chart/chart.component';
 import { TeamsComponent } from './teams/teams.component';
 
 import { AuthenticationService } from './signup/authentication.service';
-import { UserService } from './signup/user.service';
+
 import { TeamsService } from './teams/teams.service';
 import { SignupComponent } from './signup/signup.component';
 import { RankingListComponent } from './ranking-list/ranking-list.component';
@@ -101,7 +101,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     },
     TeamsService,
     AuthenticationService,
-    UserService,
     AuthGuard,
     {
       provide: HighchartsStatic,

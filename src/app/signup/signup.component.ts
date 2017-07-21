@@ -40,6 +40,8 @@ export class SignupComponent implements OnInit {
 
 
         if (result === true) {
+          const currentUserSess = JSON.parse(localStorage.getItem('currentUser'));
+          console.log(currentUserSess, 'login succ');
           // login successful
           this.router.navigate(['/ranking/list']);
         } else {
